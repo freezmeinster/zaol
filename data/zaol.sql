@@ -76,14 +76,15 @@ DROP TABLE IF EXISTS `zakat`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `zakat` (
   `id` int(11) NOT NULL,
-  `users` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
   `type` int(11) NOT NULL,
-  `amount` double NOT NULL,
-  `date` datetime NOT NULL,
+  `amount` float NOT NULL,
+  `reg_date` datetime NOT NULL,
   `state` varchar(45) NOT NULL DEFAULT 'draft',
-  `bank_account` int(11) NOT NULL,
+  `bank_account` int(11) DEFAULT NULL,
   `transfer_code` varchar(10) NOT NULL,
   `is_pretransfer` tinyint(4) NOT NULL DEFAULT '0',
+  `active_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `transfer_code_UNIQUE` (`transfer_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -96,6 +97,31 @@ CREATE TABLE `zakat` (
 LOCK TABLES `zakat` WRITE;
 /*!40000 ALTER TABLE `zakat` DISABLE KEYS */;
 /*!40000 ALTER TABLE `zakat` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zakat_item`
+--
+
+DROP TABLE IF EXISTS `zakat_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zakat_item` (
+  `id` int(11) NOT NULL,
+  `zakat_id` int(11) NOT NULL,
+  `amount` float DEFAULT NULL,
+  `description` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zakat_item`
+--
+
+LOCK TABLES `zakat_item` WRITE;
+/*!40000 ALTER TABLE `zakat_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zakat_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -130,4 +156,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-24 22:46:25
+-- Dump completed on 2015-09-25 12:45:23
