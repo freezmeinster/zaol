@@ -29,7 +29,7 @@
           element: 'line-chart',
           resize: true,
           data: [
-            {% for data in maal %}
+            {% for data in zakat %}
               {y: "{{ data.month }}", item1: {{ data.value }}},
             {% endfor %}
           ],

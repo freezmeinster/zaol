@@ -61,6 +61,8 @@ class Twig
 
 		$view = $view . '.twig';
 		$CI =& get_instance();
+		$params['user_fullname'] = $CI->session->userdata('name');
+		$params['user_reg_since'] = $CI->session->userdata('reg_date');
 		$CI->output->set_output($this->twig->render($view, $params));
 	}
 

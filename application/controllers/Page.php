@@ -17,6 +17,10 @@ class Page extends CI_Controller {
 	}
 	public function landing()
 	{
-		redirect("/dashboard/");
+		if($this->personal->is_login()){
+			redirect("/dashboard/");	
+		} else {
+			redirect("/dashboard/login");
+		}
 	}
 }
