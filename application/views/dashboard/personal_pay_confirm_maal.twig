@@ -1,0 +1,58 @@
+{% extends "dashboard/base.twig" %}
+{% block extra_css %}{% endblock %}
+{% block content %}
+<div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Konfirmasi Bayar Zakat Maal</h3>
+             
+            </div><!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Tipe :</label>
+                    {{ type }}
+                  </div><!-- /.form-group -->
+                 
+                </div><!-- /.col -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Bank :</label>
+                    {{ bank.bank_name }} {{ bank.bank_account_number}}
+                  </div>
+                </div><!-- /.col -->
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                        <table class="table">
+                                    <tr>
+                                                <th>Jumlah</th>
+                                                <th>Keterangan</th>
+                                    </tr>
+                                    {% for  item in data %}
+                                    <tr>
+                                                <td>Rp {{ item.jumlah }}</td>
+                                                <td>{{ item.desc }}</td>
+                                    </tr>
+                                    {% endfor %}
+                        </table>
+                </div>
+              </div>
+               
+                <a href="/dashboard/personal_pay_maal/{{ user_id }}" class="btn btn-danger" >Batal</a>
+                <input class="btn btn-success" type="submit" value="Konfirmasi">
+                </div>
+              </div>
+            </div><!-- /.box-body -->
+            
+          </div><!-- /.box -->
+{% endblock %}
+{% block extra_js %}
+    <script>
+    $(document).ready(function(){
+        $("#add-item").click(function(){
+            $("#zakat-item tbody").append(" <tr><td><input rel='jumlah'  class='form-control' type='text'/></td><td><input rel='desc' class='form-control' type='text'/></td></tr>");
+        });
+    });
+    </script>
+{% endblock %}

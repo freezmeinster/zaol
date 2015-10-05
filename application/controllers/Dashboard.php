@@ -85,8 +85,26 @@ class Dashboard extends CI_Controller {
 	
 	public function personal_pay_maal($id){
 		$data['list_bank'] = $this->internal->get_all_bank();
+		$data['user_id'] = $id;
+		
 		$this->twig->render("dashboard/personal_pay_maal",$data);
 	}
+	
+	public function personal_pay_confirm_maal($id){
+		if ($this->input->method() == 'post'){
+			$type = $this->input->post("type");
+			$bank = $this->input->post("bank");
+			$lines = $this->input->post("data");
+			$raw_data = json_decode($lines);
+			$confirm['type'] = $this->internal->get_type($type);
+			$confirm['bank'] = $this->internal->get_bank($bank);
+			$confirm['data'] = $raw_data->data;
+			$confirm['user_id'] = $id;
+			
+			$this->twig->render("dashboard/personal_pay_confirm_maal", $confirm);
+		}
+	}
+	
 	
 	public function personal_pay_fitrah($id){
 		$this->twig->render("dashboard/personal_pay_maal");

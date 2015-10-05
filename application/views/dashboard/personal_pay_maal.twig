@@ -11,7 +11,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Tipe</label>
-                    <select class="form-control select2" name="type">
+                    <select class="form-control select2" id="type">
                       <option selected="selected" value="0">Belum Transfer</option>
                       <option value="1">Sudah Transfer</option>
                     </select>
@@ -21,8 +21,8 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Bank</label>
-                    <select class="form-control select2" name="bank">
-                      <option>---- bank ----</option>{% for bank in list_bank %}
+                    <select class="form-control select2" id="bank">
+                      <option value="0">---- bank ----</option>{% for bank in list_bank %}
                     <option value="{{ bank.id }}">{{ bank.bank_name}} {{ bank.bank_account_number}}</option>{% endfor %}
                     </select>
                   </div>
@@ -30,18 +30,32 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                <button class="btn btn-success" id="add-item">Tambah</button>
+                        <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs pull-right">
+                  <li class="active"><a href="#tab_2-2" data-toggle="tab" aria-expanded="false">Manual</a></li>
+                 
+                  <li class="pull-left header"><i class="fa fa-th"></i> Hitung Zakat</li>
+                </ul>
+                <div class="tab-content">
+                  
+                  <div class="tab-pane active" id="tab_2-2">
+                    <button class="btn btn-primary" id="add-item">Tambah</button>
                 <table class="table" id="zakat-item">
-                    <tr><th>Jumlah</th><th>Keterangan</th></tr>
-                    <tr rel="0" >
-                        <td>
-                            <input rel="jumlah"  class="form-control" type="text"/>
+                    <tr><th>Jumlah (Rp)</th><th>Keterangan</th></tr>
+                    <tr class="data_line" >
+                        <td class="jumlah">
+                            <input  class="form-control" type="text"/>
                         </td>
-                        <td>
-                            <input rel="desc" class="form-control" type="text"/>
+                        <td class="desc">
+                            <input class="form-control" type="text"/>
                         </td>
                     </tr>
                 </table>
+                  </div><!-- /.tab-pane -->
+                </div><!-- /.tab-content -->
+              </div>
+               
+                <button class="btn btn-success" id="bayar">Bayar</button>
                 </div>
               </div>
             </div><!-- /.box-body -->
@@ -54,8 +68,23 @@
 {% block extra_js %}
     <script>
     $(document).ready(function(){
+        var data = JSON.parse('{ "data" : []}');
+        var redirect = '/dashboard/personal_pay_confirm_maal/{{ user_id }}';
+
         $("#add-item").click(function(){
-            $("#zakat-item tbody").append(" <tr><td><input rel='jumlah'  class='form-control' type='text'/></td><td><input rel='desc' class='form-control' type='text'/></td></tr>");
+            $("#zakat-item tbody").append(" <tr class='data_line'><td  class='jumlah'><input  class='form-control' type='text'/></td><td  class='desc'><input class='form-control' type='text'/></td></tr>");
+        });
+        
+        $("#bayar").click(function(){
+            var type = $("#type").val();
+            var bank = $("#bank").val();
+            $(".data_line").each(function(){
+                var jumlah = $(this).find(".jumlah input").val();
+                var desc = $(this).find(".desc input").val();
+                data['data'].push({"jumlah" :jumlah,"desc" : desc});
+            });
+            console.log(JSON.stringify(data));
+            $.redirectPost(redirect, {type: type, bank: bank, data : JSON.stringify(data)});
         });
     });
     </script>
