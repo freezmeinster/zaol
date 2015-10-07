@@ -31,7 +31,7 @@ class Dashboard extends CI_Controller {
 			}
 			$this->twig->render($template, $data);
 		 } else {
-			redirect("/dashboard/");
+			redirect("dashboard/");
 		 }
 	}
 	
@@ -40,9 +40,9 @@ class Dashboard extends CI_Controller {
 			$email = $this->input->post("email");
 			$pwd = $this->input->post("password");
 			if ($this->personal->login($email,$pwd)){
-				redirect("/dashboard");
+				redirect("dashboard");
 			} else {
-				redirect("/dashboard/login");
+				redirect("dashboard/login");
 			}
 			
 		}
@@ -51,7 +51,7 @@ class Dashboard extends CI_Controller {
 	
 	public function logout(){
 		$this->session->sess_destroy();
-		redirect("/dashboard/login");
+		redirect("dashboard/login");
 	}
 	
 	public function register(){
@@ -63,7 +63,7 @@ class Dashboard extends CI_Controller {
 			$name = $this->input->post("name");
 			
 			if ($this->personal->user_exist($email)) {
-				redirect("/dashboard/register");
+				redirect("dashboard/register");
 			} else {
 				if ($pass1 == $pass2 ){
 					$data = array(
@@ -75,7 +75,7 @@ class Dashboard extends CI_Controller {
 					$this->personal->register($data);
 					redirect("/");
 				} else {
-					redirect("/dashboard/register");
+					redirect("dashboard/register");
 				}
 				
 			}

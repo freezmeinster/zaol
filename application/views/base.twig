@@ -13,15 +13,15 @@
     <title>Bayar Zakat Online</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ base_url() }}/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/assets/bootstrap/justified-nav.css" rel="stylesheet">
+    <link href="{{ base_url() }}/assets/bootstrap/justified-nav.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="/assets/bootstrap/html5shiv.min.js"></script>
-      <script src="/assets/bootstrap/respond.min.js"></script>
+      <script src="{{ base_url() }}/assets/bootstrap/html5shiv.min.js"></script>
+      <script src="{{ base_url() }}/assets/bootstrap/respond.min.js"></script>
     <![endif]-->
   </head>
 
@@ -36,9 +36,9 @@
         <nav>
           <ul class="nav nav-justified">
             <li class="active"><a href="#">Beranda</a></li>
-			<li><a href="/page/landing">Profil Zakat</a></li>
-            <li><a href="/page/about">Tentang kami</a></li>
-            <li><a href="/page/contact">Kontak</a></li>
+			<li><a href="{{ site_url() }}/page/landing">Profil Zakat</a></li>
+            <li><a href="{{ site_url() }}/page/about">Tentang kami</a></li>
+            <li><a href="{{ site_url() }}/page/contact">Kontak</a></li>
           </ul>
         </nav>
       </div>
@@ -47,7 +47,7 @@
       <div class="jumbotron">
         <h1>Ayo berzakat!</h1>
         <p class="lead">Berzakat jadi mudah di mana saja dan kapan saja. Anda tidak perlu khawatir dengan prosedur yang rumit karena kami di sini siap membatu penyaluran zakat anda.</p>
-        <p><a class="btn btn-lg btn-success" href="/page/landing" role="button">Mulai di sini !</a></p>
+        <p><a class="btn btn-lg btn-success" href="{{ site_url() }}/page/landing" role="button">Mulai di sini !</a></p>
       </div>
 
       <!-- Example row of columns -->
